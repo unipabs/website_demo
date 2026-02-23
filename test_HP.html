@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepOncology AI | Research</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-deep: #050505;
+            --bg-card: rgba(20, 20, 20, 0.6);
+            --accent: #0084ff;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND ELEMENTS --- */
+        .mesh-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 132, 255, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+        }
+
+        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+
+        /* --- HERO SECTION --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+        }
+
+        .badge {
+            background: rgba(0, 132, 255, 0.1);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 132, 255, 0.2);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 25px;
+            background: linear-gradient(180deg, #FFFFFF 0%, #71717A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            max-width: 600px;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        /* --- CONTENT SECTIONS --- */
+        section { padding: 100px 10%; }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-10px);
+            background: rgba(30, 30, 30, 0.6);
+        }
+
+        .icon-box {
+            width: 50px; height: 50px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        /* --- METRICS BAR --- */
+        .metrics {
+            display: flex;
+            justify-content: space-around;
+            background: var(--bg-card);
+            padding: 60px 20px;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            margin-top: 50px;
+        }
+
+        .metric-item h2 { color: var(--accent); font-size: 2.5rem; }
+        .metric-item p { color: var(--text-secondary); font-size: 0.9rem; }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 50px 10%;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .metrics { flex-direction: column; gap: 40px; text-align: center; }
+        }
+        
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 1024px) {
+    h1 { font-size: 3.5rem; }
+    section { padding: 80px 5%; }
+}
+
+@media (max-width: 768px) {
+    nav { padding: 15px 5%; }
+    .nav-links { display: none; } /* Could be replaced with a hamburger menu */
+    
+    h1 { font-size: 2.8rem; }
+    .hero-desc { font-size: 1rem; }
+    
+    .mission-content { grid-template-columns: 1fr; gap: 40px; }
+    .result-grid { grid-template-columns: 1fr; }
+    .comparison-container { height: 300px; }
+    
+    .team-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* --- SCROLLBAR POLISH --- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { 
+    background: #333; 
+    border-radius: 10px; 
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+    </style>
+    
+</head>
+<body>
+
+    <div class="mesh-gradient"></div>
+
+    <nav>
+        <div class="logo">DEEPONCOLOGY AI</div>
+        <div class="nav-links">
+            <a href="#research">Research</a>
+            <a href="#models">Models</a>
+            <a href="#impact">Impact</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="badge">ONCOLOGY RESEARCH 2026</div>
+        <h1>Decoding Tumor Dynamics <br> Through Intelligence</h1>
+        <p class="hero-desc">Advancing label-free cancer spheroid analysis with XAI-validated deep learning architectures.</p>
+        <div class="btn-group">
+            <button style="padding: 15px 35px; border-radius: 50px; background: white; border: none; font-weight: 600; cursor: pointer;">Explore Models</button>
+        </div>
+    </header>
+
+    <section id="research">
+        <h2 class="section-title">Core Methodologies</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="icon-box"><i class="fas fa-microscope"></i></div>
+                <h3>Phase-Contrast Viability</h3>
+                <p>Non-invasive prediction of cellular states without destructive chemical assays, allowing for longitudinal monitoring.</p>
+            </div>
+            <div class="card">
+                <div class="icon-box"><i class="fas fa-eye"></i></div>
+                <h3>XAI Validation</h3>
+                <p>Utilizing Grad-CAM and TCAV to verify that neural attention aligns with biological markers like necrotic cores.</p>
+            </div>
+            <div class="card">
+                <div class="icon-box"><i class="fas fa-network-wired"></i></div>
+                <h3>Domain Adaptation</h3>
+                <p>Ensuring model robustness across diverse imaging platforms and varying laboratory conditions.</p>
+            </div>
+        </div>
+
+        <div class="metrics">
+            <div class="metric-item">
+                <h2>+5%</h2>
+                <p>Accuracy Increase vs. Baseline</p>
+            </div>
+            <div class="metric-item">
+                <h2>Label-Free</h2>
+                <p>Non-Destructive Analysis</p>
+            </div>
+            <div class="metric-item">
+                <h2>100%</h2>
+                <p>XAI Verified Predictions</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications" style="background: rgba(255,255,255,0.01);">
+        <h2 class="section-title">Selected Publications</h2>
+        <div class="grid">
+            <div class="pub-card">
+                <span class="pub-date">FEB 2026</span>
+                <h3>Explainable Deep Learning for Phase-Contrast Spheroid Viability</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary);">An integrated approach to non-invasive oncology screening using Grad-CAM and SSL.</p>
+                <span class="pub-journal">Nature Communications (Computational Biology)</span>
+            </div>
+            <div class="pub-card">
+                <span class="pub-date">NOV 2025</span>
+                <h3>Overcoming Domain Shift in Microscopy Image Segmentation</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary);">Novel domain adaptation techniques for high-throughput cancer drug discovery.</p>
+                <span class="pub-journal">Journal of Machine Learning Research</span>
+            </div>
+        </div>
+    </section>
+<section id="demo" style="background: radial-gradient(circle at top, rgba(0, 132, 255, 0.05), transparent);">
+    <h2 class="section-title">Inference Sandbox</h2>
+    <p style="color: var(--text-secondary); margin-bottom: 40px; max-width: 600px;">
+        Upload a phase-contrast spheroid image to simulate our deep learning pipeline and visualize focal points through Grad-CAM.
+    </p>
+
+    <div class="demo-container" id="demoBox">
+        <div id="uploadState" class="upload-zone">
+            <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
+            <h3>Drop Spheroid Image</h3>
+            <p>PNG, JPG up to 10MB</p>
+            <button class="cta-button" onclick="simulateProcessing()" style="margin-top: 20px; background: var(--accent); color: white; border: none; padding: 10px 25px; border-radius: 5px; cursor: pointer;">Select Sample Image</button>
+        </div>
+
+        <div id="processingState" style="display: none; text-align: center; padding: 60px;">
+            <div class="scanner"></div>
+            <h3 style="margin-top: 30px; letter-spacing: 2px;">ANALYZING MORPHOLOGY...</h3>
+            <p id="statusText" style="color: var(--accent); font-family: monospace; margin-top: 10px;">Extracting Feature Maps [0%]</p>
+        </div>
+
+<div id="resultState" style="display: none; width: 100%;">
+    <div class="comparison-header">
+        <span class="tag">AI Analysis: Interpretation Map</span>
+        <button class="report-btn" onclick="generateReport()">
+            <i class="fas fa-file-pdf"></i> Download Research Report
+        </button>
+    </div>
+
+    <div class="comparison-container" id="sliderContainer">
+        <div class="image-box original" style="background-image: url('https://via.placeholder.com/800x400/0a0a0a/fff?text=Original+Spheroid+View');"></div>
+        
+        <div class="image-box heatmap" id="heatmapResize" style="background-image: url('https://via.placeholder.com/800x400/000/ff4b4b?text=Grad-CAM+Attention+Map');">
+            <div class="heatmap-glow-static"></div>
+        </div>
+
+        <div class="slider-handle" id="handle">
+            <div class="handle-line"></div>
+            <div class="handle-circle"><i class="fas fa-arrows-alt-h"></i></div>
+        </div>
+    </div>
+
+    <div class="metrics-mini">
+        <div><strong>Viability Index:</strong> <span style="color: var(--accent);">84.2%</span></div>
+        <div><strong>Necrotic Ratio:</strong> <span style="color: #ff4b4b;">0.12</span></div>
+        <div><strong>Consistency Score:</strong> <span>99.4%</span></div>
+    </div>
+    
+    <div style="text-align: center;">
+        <button onclick="resetDemo()" class="reset-link">← Analyze Another Sample</button>
+    </div>
+</div>
+
+<style>
+    .comparison-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .report-btn {
+        background: transparent;
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .report-btn:hover {
+        background: var(--accent);
+        color: white;
+    }
+
+    /* Slider Core Logic */
+    .comparison-container {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        overflow: hidden;
+        border-radius: 12px;
+        cursor: ew-resize;
+        border: 1px solid var(--glass-border);
+    }
+
+    .image-box {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .heatmap {
+        width: 50%; /* Initial split */
+        border-right: 2px solid var(--accent);
+        z-index: 2;
+    }
+
+    .slider-handle {
+        position: absolute;
+        top: 0; left: 50%;
+        height: 100%;
+        width: 2px;
+        background: var(--accent);
+        z-index: 3;
+        transform: translateX(-50%);
+    }
+
+    .handle-circle {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px; height: 40px;
+        background: var(--accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 15px rgba(0, 132, 255, 0.5);
+    }
+
+    .reset-link {
+        background: transparent;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+        cursor: pointer;
+        margin-bottom: 20px;
+    }
+
+    .reset-link:hover { color: white; }
+</style>
+
+<script>
+    // Existing simulateProcessing logic...
+    function simulateProcessing() {
+        document.getElementById('uploadState').style.display = 'none';
+        document.getElementById('processingState').style.display = 'block';
+        
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 5;
+            document.getElementById('statusText').innerText = `Running XAI Inference... [${progress}%]`;
+            if (progress >= 100) {
+                clearInterval(interval);
+                showResults();
+                initSlider();
+            }
+        }, 100);
+    }
+
+    function initSlider() {
+        const container = document.getElementById('sliderContainer');
+        const heatmap = document.getElementById('heatmapResize');
+        const handle = document.getElementById('handle');
+
+        container.addEventListener('mousemove', (e) => {
+            let rect = container.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            if (x < 0) x = 0;
+            if (x > rect.width) x = rect.width;
+
+            let percentage = (x / rect.width) * 100;
+            heatmap.style.width = percentage + '%';
+            handle.style.left = percentage + '%';
+        });
+    }
+
+    function generateReport() {
+        const btn = document.querySelector('.report-btn');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+        setTimeout(() => {
+            alert('Research Report Generated: Spheroid_ID_9928_Analysis.pdf');
+            btn.innerHTML = '<i class="fas fa-file-pdf"></i> Download Research Report';
+        }, 2000);
+    }
+
+    function showResults() {
+        document.getElementById('processingState').style.display = 'none';
+        document.getElementById('resultState').style.display = 'block';
+    }
+
+    function resetDemo() {
+        document.getElementById('resultState').style.display = 'none';
+        document.getElementById('uploadState').style.display = 'block';
+    }
+</script>
+
+<script>
+    function simulateProcessing() {
+        document.getElementById('uploadState').style.display = 'none';
+        document.getElementById('processingState').style.display = 'block';
+        
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 10;
+            document.getElementById('statusText').innerText = `Extracting Feature Maps [${progress}%]`;
+            if (progress >= 100) {
+                clearInterval(interval);
+                showResults();
+            }
+        }, 200);
+    }
+
+    function showResults() {
+        document.getElementById('processingState').style.display = 'none';
+        document.getElementById('resultState').style.display = 'block';
+    }
+
+    function resetDemo() {
+        document.getElementById('resultState').style.display = 'none';
+        document.getElementById('uploadState').style.display = 'block';
+    }
+</script>
+
+
+<section id="mission">
+    <div class="mission-wrapper">
+        <h2 class="section-title">The Mission</h2>
+        <div class="mission-content">
+            <div class="mission-text">
+                <p class="lead">We believe that the future of oncology lies in the <strong>synergy between biological complexity and computational clarity.</strong></p>
+                <p>Traditional drug discovery is often slowed by the "observation gap"—the delay between treatment and measurable outcome. Our lab is dedicated to closing that gap. By leveraging 3D spheroid models and XAI-validated neural networks, we provide researchers with real-time, non-invasive insights that were previously invisible.</p>
+                <p>Our goal is to transform every microscopy image into a rich data stream, accelerating the journey from the laboratory bench to the patient’s bedside.</p>
+            </div>
+            <div class="mission-stats">
+                <div class="stat-box">
+                    <h4>50k+</h4>
+                    <span>Spheroids Analyzed</span>
+                </div>
+                <div class="stat-box">
+                    <h4>12</h4>
+                    <span>Global Partnerships</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .mission-wrapper { max-width: 1000px; margin: 0 auto; }
+    .mission-content { display: grid; grid-template-columns: 2fr 1fr; gap: 60px; align-items: center; }
+    .lead { font-size: 1.5rem; color: var(--text-primary); margin-bottom: 20px; font-weight: 500; }
+    .mission-text p { margin-bottom: 20px; color: var(--text-secondary); }
+    
+    .stat-box {
+        background: var(--bg-card);
+        border: 1px solid var(--glass-border);
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .stat-box h4 { font-size: 2rem; color: var(--accent); }
+    .stat-box span { font-size: 0.8rem; text-transform: uppercase; color: var(--text-secondary); }
+</style>
+
+
+    <section id="team">
+        <h2 class="section-title">Our Researchers</h2>
+        
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-img"><i class="fas fa-user-doctor"></i></div>
+                <h4>Dr. Elena Voss</h4>
+                <p>Principal Investigator <br> AI in Oncology</p>
+            </div>
+            <div class="team-member">
+                <div class="member-img"><i class="fas fa-user-gear"></i></div>
+                <h4>Mark Chen</h4>
+                <p>Lead ML Engineer <br> Computer Vision</p>
+            </div>
+            <div class="team-member">
+                <div class="member-img"><i class="fas fa-dna"></i></div>
+                <h4>Sarah Jenkins</h4>
+                <p>Biological Lead <br> 3D Cell Models</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" style="background: rgba(255,255,255,0.02);">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <h2 class="section-title">Bridging Biology and AI</h2>
+            <p style="color: var(--text-secondary); font-size: 1.1rem;">
+                Our study demonstrates that machine learning does not have to be a "black box." By proving that our models focus on actual necrotic fragmentation, we provide researchers with a tool that is as interpretable as it is powerful.
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 DeepOncology Research Lab. All rights reserved.</p>
+        <p>Built for the future of Cancer Research.</p>
+    </footer>
+
+</body>
+</html>
