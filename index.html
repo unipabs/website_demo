@@ -692,27 +692,183 @@
 </style>
 
 
-    <section id="team">
+ <section id="team" class="researcher-section">
+    <div class="section-meta">
+        <span class="protocol-tag">Lab Personnel // 2026</span>
         <h2 class="section-title">Our Researchers</h2>
-        
-        <div class="team-grid">
-            <div class="team-member">
-                <div class="member-img"><i class="fas fa-user-doctor"></i></div>
-                <h4>Dr. Elena Voss</h4>
-                <p>Principal Investigator <br> AI in Oncology</p>
-            </div>
-            <div class="team-member">
-                <div class="member-img"><i class="fas fa-user-gear"></i></div>
-                <h4>Mark Chen</h4>
-                <p>Lead ML Engineer <br> Computer Vision</p>
-            </div>
-            <div class="team-member">
-                <div class="member-img"><i class="fas fa-dna"></i></div>
-                <h4>Sarah Jenkins</h4>
-                <p>Biological Lead <br> 3D Cell Models</p>
+    </div>
+    
+    <div class="team-grid">
+        <div class="team-member">
+            <div class="member-card">
+                <div class="member-img-container">
+                    <img src="hirakPatra.jpg" alt="Prof. Hirak Patra" class="actual-img">
+                    <div class="member-overlay">
+                        <div class="social-mini">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fas fa-graduation-cap"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h4>Prof. Hirak Patra</h4>
+                    <p class="role">Principal Investigator</p>
+                    <p class="specialty">Advanced Therapeutics in Oncology</p>
+                </div>
             </div>
         </div>
-    </section>
+
+        <div class="team-member">
+            <div class="member-card">
+                <div class="member-img-container">
+                    <img src="hirk_400x400.jpg" alt="Dr. Mark Chen" class="actual-img">
+                    <div class="member-overlay">
+                        <div class="social-mini">
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h4>Dr. Mark Chen</h4>
+                    <p class="role">Lead AI</p>
+                    <p class="specialty"> Oncology & Computer Vision</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-member">
+            <div class="member-card">
+                <div class="member-img-container">
+                    <img src="hirk_400x400.jpg" alt="Sarah Jenkins" class="actual-img">
+                    <div class="member-overlay">
+                        <div class="social-mini">
+                            <a href="#"><i class="fas fa-flask"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h4>Sarah Jenkins</h4>
+                    <p class="role">Biological Lead</p>
+                    <p class="specialty">3D Cell Models</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* COMPACT ROUNDED SQUARE + SOCIAL LAYER */
+.team-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.team-member {
+    flex: 0 1 200px;
+    text-align: center;
+}
+
+.member-img-container {
+    position: relative;
+    width: 160px; /* Smaller size as requested */
+    height: 160px;
+    margin: 0 auto 15px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #111;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.actual-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: 0.5s ease;
+}
+
+/* THE OVERLAY STYLE */
+.member-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 132, 255, 0.85); /* Electric Blue Overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.social-mini {
+    display: flex;
+    gap: 15px;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.social-mini a {
+    color: white;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.social-mini a:hover {
+    transform: scale(1.2);
+}
+
+/* HOVER STATES */
+.team-member:hover .member-img-container {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+}
+
+.team-member:hover .member-overlay {
+    opacity: 1;
+}
+
+.team-member:hover .social-mini {
+    transform: translateY(0);
+}
+
+.team-member:hover .actual-img {
+    filter: grayscale(0%);
+}
+
+/* TYPOGRAPHY */
+.member-info h4 {
+    color: #fff;
+    font-size: 1.05rem;
+    margin-bottom: 2px;
+}
+
+.role {
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.specialty {
+    color: #64748b;
+    font-size: 0.8rem;
+    margin-top: 4px;
+}
+</style>
+
+
+
 
     <section id="impact" style="background: rgba(255,255,255,0.02);">
         <div style="max-width: 800px; margin: 0 auto; text-align: center;">
