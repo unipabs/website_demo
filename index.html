@@ -209,7 +209,9 @@
         <div class="nav-links">
             <a href="#research">Research</a>
             <a href="#analytical-engines">Models</a>
+            <a href="#publications">Publications</a>
             <a href="#impact">Impact</a>
+            
         </div>
     </nav>
 
@@ -417,33 +419,107 @@
     <section id="publications" style="background: rgba(255,255,255,0.01);">
         <h2 class="section-title">Selected Publications</h2>
         <div class="grid">
-            <div class="pub-card">
-                <span class="pub-date">FEB 2026</span>
-                <h3>Explainable Deep Learning for Phase-Contrast Spheroid Viability</h3>
-                <p style="font-size: 0.9rem; color: var(--text-secondary);">An integrated approach to non-invasive oncology screening using Grad-CAM and SSL.</p>
-                <span class="pub-journal">Nature Communications (Computational Biology)</span>
-            </div>
-            <div class="pub-card">
-                <span class="pub-date">NOV 2025</span>
-                <h3>Overcoming Domain Shift in Microscopy Image Segmentation</h3>
-                <p style="font-size: 0.9rem; color: var(--text-secondary);">Novel domain adaptation techniques for high-throughput cancer drug discovery.</p>
-                <span class="pub-journal">Journal of Machine Learning Research</span>
-            </div>
-        </div>
+	<a href="https://www.nature.com/articles/s42004-025-01491-5" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+	    <div class="pub-card" style="cursor: pointer; transition: transform 0.3s ease;">
+		<span class="pub-date">MAR 2026</span>
+		<h3>Towards precision medicine using biochemically triggered cleavable conjugation</h3>
+		<p style="font-size: 0.9rem; color: var(--text-secondary);">comprehensive classification of the intrinsic physicochemical differences found in pathological areas and their applications in drug delivery, prodrug activation, imaging, and theranostics for future personalised medicines.</p>
+		<span class="pub-journal">Nature Communications Chemistry</span>
+	    </div>
+	</a>
+            <a href="https://www.sciencedirect.com/science/article/pii/S1385894726025830" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+    <div class="pub-card" style="cursor: pointer; transition: transform 0.3s ease;">
+        <span class="pub-date">FEB 2025</span>
+        <h3>Programmable multispecific polybodys for T cell engagement and checkpoint modulation enhancing solid tumor immunotherapy</h3>
+        <p style="font-size: 0.9rem; color: var(--text-secondary);">Multispecifc polybodys achieve solid tumor inhibition and immune cell infiltration in mice solid tumor models.</p>
+        <span class="pub-journal">Chemical Engineering Journal</span>
+    </div>
+</a>
+<a href="https://www.nature.com/articles/s41536-026-00471-0" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+    <div class="pub-card" style="cursor: pointer; transition: transform 0.3s ease;">
+        <span class="pub-date">JAN 2026</span>
+        <h3>Seeing through collagen: integrative pro-regenerative corneal implants for clearer future</h3>
+        <p style="font-size: 0.9rem; color: var(--text-secondary);">This review provides a comprehensive analysis of the current state and the future strategies to optimize collagen.</p>
+        <span class="pub-journal">npj Regenerative Medicine</span>
+    </div>
+</a>
+<a href="https://doi.org/10.1038/s41467-026-00000-x" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+    <div class="pub-card" style="cursor: pointer; transition: transform 0.3s ease;">
+        <span class="pub-date">FEB 2026</span>
+        <h3>Explainable Deep Learning for Phase-Contrast Spheroid Viability</h3>
+        <p style="font-size: 0.9rem; color: var(--text-secondary);">An integrated approach to non-invasive oncology screening using Grad-CAM and SSL.</p>
+        <span class="pub-journal">Journal of Machine Learning (JML)</span>
+    </div>
+</a>
     </section>
-<section id="demo" style="background: radial-gradient(circle at top, rgba(0, 132, 255, 0.05), transparent);">
-    <h2 class="section-title">Inference Sandbox</h2>
-    <p style="color: var(--text-secondary); margin-bottom: 40px; max-width: 600px;">
-        Upload a phase-contrast spheroid image to simulate our deep learning pipeline and visualize focal points through Grad-CAM.
-    </p>
 
-    <div class="demo-container" id="demoBox">
-        <div id="uploadState" class="upload-zone">
-            <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;"></i>
-            <h3>Drop Spheroid Image</h3>
-            <p>PNG, JPG up to 10MB</p>
-            <button class="cta-button" onclick="simulateProcessing()" style="margin-top: 20px; background: var(--accent); color: white; border: none; padding: 10px 25px; border-radius: 5px; cursor: pointer;">Select Sample Image</button>
+<section id="sandbox" style="padding: 100px 10%; background: #000; text-align: center; min-height: 100vh;">
+    <h2 style="color: #fff; margin-bottom: 30px; font-family: sans-serif;">Inference Sandbox</h2>
+    
+    <div class="upload-box" onclick="document.getElementById('fileInput').click()" style="border: 2px dashed #333; padding: 60px; border-radius: 20px; cursor: pointer; background: #050505; transition: 0.3s;">
+        <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: #0084ff; margin-bottom: 20px;"></i>
+        <p style="color: #64748b;">Click to select Spheroid Image</p>
+        <input type="file" id="fileInput" hidden accept="image/*">
+    </div>
+
+    <div id="metaModal" class="modal-overlay" style="display:none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; align-items:center; justify-content:center;">
+        <div class="modal-content" style="background:#111; border:1px solid #333; padding:40px; border-radius:24px; width:90%; max-width:600px; text-align:left;">
+            
+            <div id="formState">
+                <h3 style="color:#fff; margin-bottom:5px;"><i class="fas fa-database"></i> Sample Metadata</h3>
+                <p style="color:#64748b; font-size:0.9rem; margin-bottom:25px;">Provide context for the AI analysis report.</p>
+                
+                <form id="metadataForm">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                        <div class="input-group">
+                            <label style="color:#0084ff; font-size:0.7rem; font-weight:700; text-transform:uppercase;">Image Type</label>
+                            <input type="text" name="img_type" placeholder="Phase Contrast" required style="width:100%; background:#000; border:1px solid #222; padding:10px; color:#fff; border-radius:8px;">
+                        </div>
+                        <div class="input-group">
+                            <label style="color:#0084ff; font-size:0.7rem; font-weight:700; text-transform:uppercase;">Time</label>
+                            <input type="text" name="timestamp" placeholder="e.g. 14:00" required style="width:100%; background:#000; border:1px solid #222; padding:10px; color:#fff; border-radius:8px;">
+                        </div>
+                        <div class="input-group">
+                            <label style="color:#0084ff; font-size:0.7rem; font-weight:700; text-transform:uppercase;">Location</label>
+                            <input type="text" name="location" placeholder="Plate A / Well 1" required style="width:100%; background:#000; border:1px solid #222; padding:10px; color:#fff; border-radius:8px;">
+                        </div>
+                        <div class="input-group">
+                            <label style="color:#0084ff; font-size:0.7rem; font-weight:700; text-transform:uppercase;">Drug Code</label>
+                            <input type="text" name="drug_code" placeholder="CBD-9" required style="width:100%; background:#000; border:1px solid #222; padding:10px; color:#fff; border-radius:8px;">
+                        </div>
+                    </div>
+                    <div style="margin-top:25px; display:flex; gap:15px;">
+                        <button type="button" onclick="location.reload()" style="flex:1; background:transparent; border:1px solid #222; color:#64748b; padding:12px; border-radius:10px; cursor:pointer;">Cancel</button>
+                        <button type="submit" style="flex:2; background:#0084ff; border:none; color:#fff; padding:12px; border-radius:10px; font-weight:700; cursor:pointer;">Run Inference</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="successState" style="display:none;">
+                </div>
+
         </div>
+    </div>
+</section>
+
+<style>
+    :root { --accent: #0084ff; }
+    .modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 9999;
+    }
+    .modal-content {
+        background: #111; border: 1px solid #333; padding: 40px; border-radius: 24px; width: 90%; max-width: 550px; text-align: left;
+    }
+    .modal-content h3 { color: #fff; margin-bottom: 5px; }
+    .modal-content p { color: #64748b; font-size: 0.9rem; margin-bottom: 25px; }
+    .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .input-group label { display: block; color: var(--accent); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
+    .input-group input { width: 100%; background: #000; border: 1px solid #222; padding: 12px; color: #fff; border-radius: 8px; outline: none; }
+    .modal-btns { margin-top: 30px; display: flex; gap: 15px; }
+    .btn-primary { flex: 2; background: var(--accent); color: #fff; border: none; padding: 15px; border-radius: 10px; font-weight: 700; cursor: pointer; }
+    .btn-secondary { flex: 1; background: transparent; color: #64748b; border: 1px solid #222; border-radius: 10px; cursor: pointer; }
+</style>
 
         <div id="processingState" style="display: none; text-align: center; padding: 60px;">
             <div class="scanner"></div>
@@ -568,87 +644,91 @@
 </style>
 
 <script>
-    // Existing simulateProcessing logic...
-    function simulateProcessing() {
-        document.getElementById('uploadState').style.display = 'none';
-        document.getElementById('processingState').style.display = 'block';
-        
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += 5;
-            document.getElementById('statusText').innerText = `Running XAI Inference... [${progress}%]`;
-            if (progress >= 100) {
-                clearInterval(interval);
-                showResults();
-                initSlider();
-            }
-        }, 100);
+// Replace the simulateProcessing function in your website script with this:
+let currentImageFile = null;
+
+// 1. Handle File Selection
+document.getElementById('fileInput').addEventListener('change', function(e) {
+    if (e.target.files[0]) {
+        currentImageFile = e.target.files[0];
+        document.getElementById('metaModal').style.display = 'flex';
+    }
+});
+
+// 2. Handle Form Submission
+document.getElementById('metadataForm').onsubmit = async function(e) {
+    e.preventDefault();
+    
+    const formState = document.getElementById('formState');
+    const successState = document.getElementById('successState');
+    
+    // UI: Show Loading Spinner
+    formState.innerHTML = `
+        <div style="text-align:center; padding:40px;">
+            <div class="spinner" style="width:40px; height:40px; border:3px solid #222; border-top:3px solid #0084ff; border-radius:50%; animation:spin 1s linear infinite; margin:0 auto;"></div>
+            <p style="color:#0084ff; margin-top:20px; font-weight:bold;">Running PyTorch Analysis...</p>
+        </div>
+    `;
+
+    // A. Prepare Data
+    const formData = new FormData();
+    const metaEntries = new FormData(this);
+    
+    let textContent = "SPHEROID ANALYSIS REPORT\n========================\n";
+    for (let [key, value] of metaEntries.entries()) {
+        textContent += `${key.toUpperCase()}: ${value}\n`;
     }
 
-    function initSlider() {
-        const container = document.getElementById('sliderContainer');
-        const heatmap = document.getElementById('heatmapResize');
-        const handle = document.getElementById('handle');
+    const baseName = currentImageFile.name.split('.').slice(0, -1).join('.');
+    const txtFile = new File([textContent], `${baseName}.txt`, { type: "text/plain" });
 
-        container.addEventListener('mousemove', (e) => {
-            let rect = container.getBoundingClientRect();
-            let x = e.clientX - rect.left;
-            if (x < 0) x = 0;
-            if (x > rect.width) x = rect.width;
+    // B. Package for Python
+    formData.append('image_file', currentImageFile);
+    formData.append('text_file', txtFile);
 
-            let percentage = (x / rect.width) * 100;
-            heatmap.style.width = percentage + '%';
-            handle.style.left = percentage + '%';
+    try {
+        // C. Fetch from Flask
+        const response = await fetch('http://127.0.0.1:5000/upload', {
+            method: 'POST',
+            body: formData
         });
-    }
 
-    function generateReport() {
-        const btn = document.querySelector('.report-btn');
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
-        setTimeout(() => {
-            alert('Research Report Generated: Spheroid_ID_9928_Analysis.pdf');
-            btn.innerHTML = '<i class="fas fa-file-pdf"></i> Download Research Report';
-        }, 2000);
-    }
+        const data = await response.json();
 
-    function showResults() {
-        document.getElementById('processingState').style.display = 'none';
-        document.getElementById('resultState').style.display = 'block';
+        if (response.ok) {
+            // D. Display Result Report
+            formState.style.display = 'none';
+            successState.style.display = 'block';
+            
+            successState.innerHTML = `
+                <div style="text-align:left;">
+                    <h3 style="color:#fff; border-bottom:1px solid #222; padding-bottom:10px;">Inference Result</h3>
+                    <div style="display:flex; gap:20px; margin-top:20px; align-items:center;">
+                        <div style="flex:1;">
+                            <label style="color:#64748b; font-size:0.7rem; text-transform:uppercase;">Classification</label>
+                            <h2 style="color:#fff; margin:5px 0;">${data.class_name}</h2>
+                            <label style="color:#64748b; font-size:0.7rem; text-transform:uppercase; display:block; margin-top:15px;">Confidence</label>
+                            <h3 style="color:#10b981; margin:5px 0;">${data.accuracy}</h3>
+                        </div>
+                        <div style="flex:1; text-align:center;">
+                            <label style="color:#0084ff; font-size:0.7rem; font-weight:700; display:block; margin-bottom:5px;">GRAD-CAM HEATMAP</label>
+                            <img src="data:image/jpeg;base64,${data.gradcam}" style="width:100%; border-radius:12px; border:1px solid #333;">
+                        </div>
+                    </div>
+                    <button onclick="location.reload()" style="width:100%; margin-top:30px; padding:12px; background:#111; color:#fff; border:1px solid #333; border-radius:8px; cursor:pointer;">Analyze New Sample</button>
+                </div>
+            `;
+        }
+    } catch (err) {
+        alert("Server connection failed. Is the Python app running?");
+        location.reload();
     }
+};
 
-    function resetDemo() {
-        document.getElementById('resultState').style.display = 'none';
-        document.getElementById('uploadState').style.display = 'block';
-    }
 </script>
-
-<script>
-    function simulateProcessing() {
-        document.getElementById('uploadState').style.display = 'none';
-        document.getElementById('processingState').style.display = 'block';
-        
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += 10;
-            document.getElementById('statusText').innerText = `Extracting Feature Maps [${progress}%]`;
-            if (progress >= 100) {
-                clearInterval(interval);
-                showResults();
-            }
-        }, 200);
-    }
-
-    function showResults() {
-        document.getElementById('processingState').style.display = 'none';
-        document.getElementById('resultState').style.display = 'block';
-    }
-
-    function resetDemo() {
-        document.getElementById('resultState').style.display = 'none';
-        document.getElementById('uploadState').style.display = 'block';
-    }
-</script>
-
+<style>
+@keyframes spin { 100% { transform: rotate(360deg); } }
+</style>
 
 <section id="mission">
     <div class="mission-wrapper">
@@ -721,7 +801,7 @@
         <div class="team-member">
             <div class="member-card">
                 <div class="member-img-container">
-                    <img src="hirk_400x400.jpg" alt="Dr. Hirak Patra" class="actual-img">
+                    <img src="hirk_400x400.jpg" alt="Dr. Mark Chen" class="actual-img">
                     <div class="member-overlay">
                         <div class="social-mini">
                             <a href="#"><i class="fab fa-github"></i></a>
@@ -730,7 +810,7 @@
                     </div>
                 </div>
                 <div class="member-info">
-                    <h4>Dr. Hirak Patra</h4>
+                    <h4>Dr. Mark Chen</h4>
                     <p class="role">Lead AI</p>
                     <p class="specialty"> Oncology & Computer Vision</p>
                 </div>
@@ -740,7 +820,7 @@
         <div class="team-member">
             <div class="member-card">
                 <div class="member-img-container">
-                    <img src="hirk_400x400.jpg" alt="Hirak Patra" class="actual-img">
+                    <img src="hirk_400x400.jpg" alt="Sarah Jenkins" class="actual-img">
                     <div class="member-overlay">
                         <div class="social-mini">
                             <a href="#"><i class="fas fa-flask"></i></a>
@@ -749,7 +829,7 @@
                     </div>
                 </div>
                 <div class="member-info">
-                    <h4>Hirak Patra</h4>
+                    <h4>Sarah Jenkins</h4>
                     <p class="role">Biological Lead</p>
                     <p class="specialty">3D Cell Models</p>
                 </div>
@@ -886,24 +966,27 @@
             <p>Advancing the frontier of computational oncology through interpretable AI.</p>
         </div>
 
-        <div class="social-hub">
-            <h4>Research & Media Channels</h4>
-            <div class="social-links">
-                <a href="#" class="social-icon" aria-label="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="#" class="social-icon" aria-label="YouTube">
-                    <i class="fab fa-youtube"></i>
-                </a>
-                <a href="#" class="social-icon" aria-label="LinkedIn">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="#" class="social-icon" aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-            </div>
-        </div>
+ <div class="social-hub">
+    <h4>Research & Media Channels</h4>
+    <div class="social-links">
+        <a href="https://github.com/your-username" class="social-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github"></i>
+        </a>
+        
+        <a href="https://youtube.com/@your-channel" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-youtube"></i>
+        </a>
+        
+        <a href="https://uk.linkedin.com/in/hirak-patra-13984457" class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+        
+        <a href="https://www.instagram.com/thepatralab/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-instagram"></i>
+        </a>
+        
     </div>
+</div>
     
     <div class="footer-bottom">
         <p>© 2026 DEEPONCOLOGY LAB. ALL MODELS XAI-VERIFIED.</p>
@@ -920,7 +1003,7 @@
         background: #000;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
-
+    
     .footer-content {
         display: grid;
         grid-template-columns: 1.2fr 1.8fr;
