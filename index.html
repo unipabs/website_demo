@@ -38,6 +38,31 @@
             z-index: -1;
         }
 
+	/* Controls the size of the logo graphic */
+.nav-logo-img {
+    height: 40px;       /* Adjust this value to scale your logo up or down */
+    width: auto;        /* Ensures the aspect ratio stays perfectly proportional */
+    display: block;
+}
+
+/* Spaces the text out if you decide to keep it next to the graphic */
+.nav-logo-text {
+    margin-left: 12px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+}
+
+/* Ensure the parent nav bar accommodates the image cleanly */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+}
+
+	
         /* --- NAVIGATION --- */
         nav {
             position: fixed;
@@ -204,19 +229,25 @@
 
     <div class="mesh-gradient"></div>
 
-    <nav>
-        <div class="logo">DEEPONCOLOGY AI</div>
-        <div class="nav-links">
-            <a href="#research">Research</a>
-            <a href="#analytical-engines">Models</a>
-            <a href="#publications">Publications</a>
-            <a href="#impact">Impact</a>
+<nav>
+    <div class="logo">
+        <a href="#" style="display: flex; align-items: center; text-decoration: none;">
+            <img src="logo-DAI.png" alt="DeepOncology AI Logo" class="nav-logo-img">
             
-        </div>
-    </nav>
+            <span class="nav-logo-text">DEEPONCOLOGY AI</span>
+        </a>
+    </div>
+    
+    <div class="nav-links">
+        <a href="#research">Research</a>
+        <a href="#analytical-engines">Models</a>
+        <a href="#publications">Publications</a>
+        <a href="#impact">Impact</a>
+    </div>
+</nav>
 
     <header>
-        <div class="badge">ONCOLOGY RESEARCH 2026</div>
+        <div class="badge">ONCOLOGY RESEARCH</div>
         <h1>Decoding Tumor Dynamics <br> Through Intelligence</h1>
         <p class="hero-desc">Advancing label-free cancer spheroid analysis with XAI-validated deep learning architectures.</p>
         <div class="btn-group">
@@ -421,7 +452,7 @@
         <div class="grid">
 	<a href="https://www.nature.com/articles/s42004-025-01491-5" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
 	    <div class="pub-card" style="cursor: pointer; transition: transform 0.3s ease;">
-		<span class="pub-date">MAR 2026</span>
+		<span class="pub-date">MAR 2025</span>
 		<h3>Towards precision medicine using biochemically triggered cleavable conjugation</h3>
 		<p style="font-size: 0.9rem; color: var(--text-secondary);">comprehensive classification of the intrinsic physicochemical differences found in pathological areas and their applications in drug delivery, prodrug activation, imaging, and theranostics for future personalised medicines.</p>
 		<span class="pub-journal">Nature Communications Chemistry</span>
@@ -429,7 +460,7 @@
 	</a>
             <a href="https://www.sciencedirect.com/science/article/pii/S1385894726025830" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
     <div class="pub-card" style="cursor: pointer; transition: transform 0.3s ease;">
-        <span class="pub-date">FEB 2025</span>
+        <span class="pub-date">FEB 2026</span>
         <h3>Programmable multispecific polybodys for T cell engagement and checkpoint modulation enhancing solid tumor immunotherapy</h3>
         <p style="font-size: 0.9rem; color: var(--text-secondary);">Multispecifc polybodys achieve solid tumor inhibition and immune cell infiltration in mice solid tumor models.</p>
         <span class="pub-journal">Chemical Engineering Journal</span>
@@ -445,10 +476,10 @@
 </a>
 <a href="https://doi.org/10.1038/s41467-026-00000-x" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
     <div class="pub-card" style="cursor: pointer; transition: transform 0.3s ease;">
-        <span class="pub-date">FEB 2026</span>
-        <h3>Explainable Deep Learning for Phase-Contrast Spheroid Viability</h3>
-        <p style="font-size: 0.9rem; color: var(--text-secondary);">An integrated approach to non-invasive oncology screening using Grad-CAM and SSL.</p>
-        <span class="pub-journal">Journal of Machine Learning (JML)</span>
+        <span class="pub-date">DEC 2025</span>
+        <h3>Gold nanoparticle transport across tumour-associated biological barriers: in vitro models, imaging, and quantification</h3>
+        <p style="font-size: 0.9rem; color: var(--text-secondary);">Integrating insights from advanced in vitro modelling and cutting-edge detection strategies, this review highlights the current landscape and future directions for optimising the study of gold nanoparticle delivery across barriers in cancer nanomedicine.</p>
+        <span class="pub-journal">Royal Society of Chemistry</span>
     </div>
 </a>
     </section>
@@ -812,7 +843,7 @@ document.getElementById('metadataForm').onsubmit = async function(e) {
                 <div class="member-info">
                     <h4>Dr. Mark Chen</h4>
                     <p class="role">Lead AI</p>
-                    <p class="specialty"> Oncology & Computer Vision</p>
+                    <p class="specialty"> AI & Computer Vision</p>
                 </div>
             </div>
         </div>
@@ -820,7 +851,7 @@ document.getElementById('metadataForm').onsubmit = async function(e) {
         <div class="team-member">
             <div class="member-card">
                 <div class="member-img-container">
-                    <img src="hirk_400x400.jpg" alt="Sarah Jenkins" class="actual-img">
+                    <img src="Alex_chi.jpg" alt="Dr. Mark Chen" class="actual-img">
                     <div class="member-overlay">
                         <div class="social-mini">
                             <a href="#"><i class="fas fa-flask"></i></a>
@@ -829,9 +860,29 @@ document.getElementById('metadataForm').onsubmit = async function(e) {
                     </div>
                 </div>
                 <div class="member-info">
-                    <h4>Sarah Jenkins</h4>
+                    <h4>Dr Alexandru Chivu</h4>
                     <p class="role">Biological Lead</p>
-                    <p class="specialty">3D Cell Models</p>
+                    <p class="specialty"> Oncology & 3D Cell Models</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="team-member">
+            <div class="member-card">
+                <div class="member-img-container">
+                    <img src="Laster.jpeg" alt="Sarah Jenkins" class="actual-img">
+                    <div class="member-overlay">
+                        <div class="social-mini">
+                            <a href="#"><i class="fas fa-flask"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="member-info">
+                    <h4>Mr Thomas Lester</h4>
+                    <p class="role">Research technician</p>
+                    <p class="specialty">Optical Imaging</p>
                 </div>
             </div>
         </div>
@@ -973,7 +1024,7 @@ document.getElementById('metadataForm').onsubmit = async function(e) {
             <i class="fab fa-github"></i>
         </a>
         
-        <a href="https://youtube.com" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+        <a href="https://youtube.com/@your-channel" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-youtube"></i>
         </a>
         
@@ -989,7 +1040,7 @@ document.getElementById('metadataForm').onsubmit = async function(e) {
 </div>
     
     <div class="footer-bottom">
-        <p>© 2026 DEEPONCOLOGY LAB. ALL MODELS XAI-VERIFIED.</p>
+        <p>© 2026 PATRALAB, DEEPONCOLOGY AI VERIFIED.</p>
         <div class="legal-links">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Research</a>
