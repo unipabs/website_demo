@@ -246,18 +246,358 @@ nav {
     </div>
 </nav>
 
-    <header>
-        <div class="badge">ONCOLOGY RESEARCH</div>
-        <h1>Decoding Tumor Dynamics <br> Through Intelligence</h1>
-        <p class="hero-desc">Advancing label-free cancer spheroid analysis with XAI-validated deep learning architectures.</p>
-        <div class="btn-group">
-         <a href="#analytical-engines">
-            <button style="padding: 15px 35px; border-radius: 50px; background: white; border: none; font-weight: 600; cursor: pointer;">Explore Models</button>
-           </a>
-        </div>
-    </header>
+
+<header id="hero" class="dynamic-hero">
+    <canvas id="heroCanvas"></canvas>
+
+    <div class="hero-content"> 
+        <div class="badge">ONCOLOGY RESEARCH</div> 
+        <h1>Decoding Tumor Dynamics <br> Through Intelligence</h1> 
+
+        <p class="hero-desc">Advancing label-free cancer spheroid
+ analysis with XAI-validated deep learning architectures.</p> 
+        <div class="btn-group"> 
+         <a href="#analytical-engines"> 
+            <button class="btn-main">Explore Models</button> 
+          </a> 
+        </div> 
+    </div>
+</header>
 
 
+<style>
+/* HERO SECTION LAYOUT */
+.dynamic-hero {
+    position: relative;
+    width: 100%;
+    height: 90vh; /* Takes up most of the viewport height */
+    background: #000; /* Rich black background for contrast */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* THE CANVAS LAYER (The drifting graphics) */
+#heroCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Pushes behind the content */
+    opacity: 0.7; /* Controls overall subtlety */
+    pointer-events: none; /* Allows clicks to pass through to the button */
+}
+
+/* YOUR CONTENT LAYER (Must be z-indexed on top) */
+.hero-content {
+    position: relative;
+    z-index: 10; /* Important: On top of canvas */
+    max-width: 800px;
+    color: #fff;
+    padding: 20px;
+}
+
+/* Re-styling the badge for the black background */
+.badge {
+    background: rgba(0, 132, 255, 0.1);
+    border: 1px solid #0084ff;
+    color: #0084ff;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Restyling the main text for emphasis */
+.dynamic-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -1.5px;
+}
+
+.hero-desc {
+    color: #64748b; /* Subtle grey for body text */
+    max-width: 600px;
+    margin: 20px auto 40px auto;
+}
+
+/* Standardized button styling based on your CSS */
+.btn-main {
+    padding: 15px 40px;
+    border-radius: 50px;
+    background: #0084ff; /* Professional blue instead of plain white */
+    color: white;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 132, 255, 0.3);
+}
+
+.btn-main:hover {
+    background: white;
+    color: #0084ff;
+    box-shadow: 0 4px 25px rgba(0, 132, 255, 0.5);
+    transform: translateY(-2px);
+}
+</style>
+
+<script>
+window.onload = function() {
+    const canvas = document.getElementById('heroCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    function setSize() {
+        canvas.width = window.innerWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+    }
+    setSize();
+    window.onresize = setSize;
+
+    const particleCount = 20; // Fewer items but much BIGGER and higher fidelity
+    const particles = [];
+
+    class BioParticle {
+        constructor(type) {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            // Scale up sizes dramatically
+            this.size = Math.random() * (70 - 40) + 40; 
+            this.speedX = (Math.random() - 0.5) * 0.25;
+            this.speedY = (Math.random() - 0.5) * 0.25;
+            this.type = type;
+            this.angle = Math.random() * Math.PI * 2;
+            this.rotSpeed = (Math.random() - 0.5) * 0.005;
+            
+            // Bioluminescent Purple Palette
+            this.colors = {
+                bright: '#d8b4fe', // Light neon purple
+                mid: '#a855f7',    // Vibrant classic purple
+                dark: '#6b21a8',   // Deep violet
+                glow: 'rgba(168, 85, 247, 0.35)'
+            };
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            this.angle += this.rotSpeed;
+
+            // Handle Screen Wrap-around
+            const padding = this.size * 2;
+            if (this.x > canvas.width + padding) this.x = -padding;
+            if (this.x < -padding) this.x = canvas.width + padding;
+            if (this.y > canvas.height + padding) this.y = -padding;
+            if (this.y < -padding) this.y = canvas.height + padding;
+        }
+
+        draw() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.angle);
+            
+            // Apply Glowing Effects to Canvas context
+            ctx.shadowBlur = 25;
+            ctx.shadowColor = this.colors.mid;
+
+            switch (this.type) {
+                case 'CELL':
+                    this.drawAdvancedCell();
+                    break;
+                case 'DNA':
+                    this.drawDetailedDNA();
+                    break;
+                case 'SPHEROID':
+                    this.drawClusterSpheroid();
+                    break;
+                case 'NEURON':
+                    this.drawComplexNeuron();
+                    break;
+            }
+            ctx.restore();
+        }
+
+        // 1. High-Fidelity Biological Cell with Nucleus & Cytoplasm
+        drawAdvancedCell() {
+            // Outer Cytoplasm membrane
+            ctx.beginPath();
+            ctx.fillStyle = 'rgba(107, 33, 168, 0.08)';
+            ctx.strokeStyle = this.colors.mid;
+            ctx.lineWidth = 1.5;
+            
+            // Create organic, non-perfect circular wobbling
+            for (let i = 0; i < Math.PI * 2; i += 0.1) {
+                const wobble = Math.sin(i * 6) * 3;
+                const r = this.size + wobble;
+                const cx = Math.cos(i) * r;
+                const cy = Math.sin(i) * r;
+                if (i === 0) ctx.moveTo(cx, cy); else ctx.lineTo(cx, cy);
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Internal Nucleus
+            ctx.beginPath();
+            ctx.fillStyle = 'rgba(216, 180, 254, 0.2)';
+            ctx.strokeStyle = this.colors.bright;
+            ctx.lineWidth = 1;
+            ctx.arc(-5, -5, this.size * 0.35, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            
+            // Nucleolus Core
+            ctx.beginPath();
+            ctx.fillStyle = this.colors.bright;
+            ctx.arc(-5, -5, this.size * 0.12, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // 2. Realistic Double-Helix Floating Structure
+        drawDetailedDNA() {
+            ctx.lineWidth = 2;
+            const helixLength = this.size * 2.5;
+            const points = 16;
+            
+            ctx.shadowBlur = 15;
+
+            // Draw connecting rungs first
+            for (let i = -helixLength/2; i < helixLength/2; i += helixLength/points) {
+                const factor = (i + helixLength/2) * 0.12;
+                const y1 = Math.sin(factor) * 22;
+                const y2 = Math.sin(factor + Math.PI) * 22;
+                
+                ctx.beginPath();
+                ctx.strokeStyle = 'rgba(168, 85, 247, 0.4)';
+                ctx.moveTo(i, y1);
+                ctx.lineTo(i, y2);
+                ctx.stroke();
+            }
+
+            // Draw Strand A
+            ctx.beginPath();
+            ctx.strokeStyle = this.colors.bright;
+            for (let i = -helixLength/2; i < helixLength/2; i += 2) {
+                const y = Math.sin((i + helixLength/2) * 0.12) * 22;
+                if (i === -helixLength/2) ctx.moveTo(i, y); else ctx.lineTo(i, y);
+            }
+            ctx.stroke();
+
+            // Draw Strand B
+            ctx.beginPath();
+            ctx.strokeStyle = this.colors.mid;
+            for (let i = -helixLength/2; i < helixLength/2; i += 2) {
+                const y = Math.sin((i + helixLength/2) * 0.12 + Math.PI) * 22;
+                if (i === -helixLength/2) ctx.moveTo(i, y); else ctx.lineTo(i, y);
+            }
+            ctx.stroke();
+        }
+
+        // 3. Multi-Layered Dense Cancer Spheroid
+        drawClusterSpheroid() {
+            ctx.shadowBlur = 30;
+            // Generate nested overlapping cellular clusters
+            const layers = [this.size * 1.1, this.size * 0.85, this.size * 0.5];
+            const opacities = ['rgba(79, 18, 126, 0.15)', 'rgba(168, 85, 247, 0.25)', 'rgba(216, 180, 254, 0.5)'];
+
+            layers.forEach((radius, idx) => {
+                ctx.beginPath();
+                ctx.fillStyle = opacities[idx];
+                ctx.strokeStyle = idx === 0 ? this.colors.mid : this.colors.bright;
+                ctx.lineWidth = 1;
+                
+                for (let i = 0; i < Math.PI * 2; i += 0.2) {
+                    const microWobble = Math.cos(i * 12) * (4 - idx);
+                    const r = radius + microWobble;
+                    const sx = Math.cos(i) * r;
+                    const sy = Math.sin(i) * r;
+                    if (i === 0) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+                }
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+            });
+        }
+
+        // 4. Multipolar Neuronal Soma with Dendritic Networks
+        drawComplexNeuron() {
+            ctx.strokeStyle = this.colors.mid;
+            ctx.fillStyle = 'rgba(168, 85, 247, 0.1)';
+            ctx.lineWidth = 1.5;
+            ctx.shadowBlur = 20;
+
+            const branches = 6;
+            const points = [];
+
+            // Core body construction
+            ctx.beginPath();
+            for (let i = 0; i < branches; i++) {
+                const currentAngle = (i * Math.PI * 2) / branches;
+                // Extend star-like spikes out
+                const extRadius = this.size * (0.8 + Math.random() * 0.03); 
+                const px = Math.cos(currentAngle) * extRadius;
+                const py = Math.sin(currentAngle) * extRadius;
+                points.push({x: px, y: py, angle: currentAngle});
+                
+                if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Trace long branching trees out from endpoints
+            points.forEach(pt => {
+                ctx.beginPath();
+                ctx.strokeStyle = this.colors.bright;
+                ctx.lineWidth = 0.8;
+                ctx.moveTo(pt.x, pt.y);
+                
+                // Segment 1
+                let nextX = pt.x + Math.cos(pt.angle) * (this.size * 0.5);
+                let nextY = pt.y + Math.sin(pt.angle) * (this.size * 0.5);
+                ctx.lineTo(nextX, nextY);
+                
+                // Splits/Dendrites
+                ctx.moveTo(nextX, nextY);
+                ctx.lineTo(nextX + Math.cos(pt.angle + 0.4) * 15, nextY + Math.sin(pt.angle + 0.4) * 15);
+                ctx.moveTo(nextX, nextY);
+                ctx.lineTo(nextX + Math.cos(pt.angle - 0.4) * 15, nextY + Math.sin(pt.angle - 0.4) * 15);
+                ctx.stroke();
+            });
+        }
+    }
+
+    // Initialize System Loop
+    function init() {
+        particles.length = 0;
+        const biologicalCategories = ['CELL', 'DNA', 'SPHEROID', 'NEURON'];
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new BioParticle(biologicalCategories[i % biologicalCategories.length]));
+        }
+    }
+    init();
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+    animate();
+};
+</script>
 
 
 <section id="analytical-engines" class="engines-section">
@@ -442,41 +782,94 @@ nav {
     }
 </style>
 
-    <section id="research">
-        <h2 class="section-title">Core Methodologies</h2>
-        <div class="grid">
-            <div class="card">
-                <div class="icon-box"><i class="fas fa-microscope"></i></div>
-                <h3>Phase-Contrast Viability</h3>
-                <p>Non-invasive prediction of cellular states without destructive chemical assays, allowing for longitudinal monitoring.</p>
-            </div>
-            <div class="card">
-                <div class="icon-box"><i class="fas fa-eye"></i></div>
-                <h3>XAI Validation</h3>
-                <p>Utilizing Grad-CAM and TCAV to verify that neural attention aligns with biological markers like necrotic cores.</p>
-            </div>
-            <div class="card">
-                <div class="icon-box"><i class="fas fa-network-wired"></i></div>
-                <h3>Domain Adaptation</h3>
-                <p>Ensuring model robustness across diverse imaging platforms and varying laboratory conditions.</p>
-            </div>
-        </div>
 
-        <div class="metrics">
-            <div class="metric-item">
-                <h2>+5%</h2>
-                <p>Accuracy Increase vs. Baseline</p>
-            </div>
-            <div class="metric-item">
-                <h2>Label-Free</h2>
-                <p>Non-Destructive Analysis</p>
-            </div>
-            <div class="metric-item">
-                <h2>100%</h2>
-                <p>XAI Verified Predictions</p>
-            </div>
+<section id="research">
+    <h2 class="section-title">Core Methodologies</h2>
+    <div class="grid">
+        <div class="card microscopy-bg">
+            <div class="icon-box"><i class="fas fa-microscope"></i></div>
+            <h3>Phase-Contrast Viability</h3>
+            <p>Non-invasive prediction of cellular states without destructive chemical assays, allowing for longitudinal monitoring.</p>
         </div>
-    </section>
+        
+        <div class="card xai-bg">
+            <div class="icon-box"><i class="fas fa-eye"></i></div>
+            <h3>XAI Validation</h3>
+            <p>Utilizing Grad-CAM and TCAV to verify that neural attention aligns with biological markers like necrotic cores.</p>
+        </div>
+        
+        <div class="card network-bg">
+            <div class="icon-box"><i class="fas fa-network-wired"></i></div>
+            <h3>Domain Adaptation</h3>
+            <p>Ensuring model robustness across diverse imaging platforms and varying laboratory conditions.</p>
+        </div>
+    </div>
+</section>
+
+
+<style>
+/* BASE LAYOUT FOR CORE METHODOLOGY CARDS */
+.card {
+    position: relative;
+    background-color: #050505;
+    border: 1px solid #222;
+    padding: 35px 30px;
+    border-radius: 16px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-color 0.3s ease, 
+                box-shadow 0.3s ease;
+    z-index: 1;
+}
+
+/* CARD 1 BACKGROUND: MICROSCOPY TEXTURE */
+.card.microscopy-bg {
+    /* Replace with your image path */
+    background-image: linear-gradient(to bottom, rgba(5, 5, 5, 0.25), rgba(0, 0, 0, 0.95)), 
+                      url('output1.png');
+}
+
+/* CARD 2 BACKGROUND: GRAD-CAM / XAI GRADIENT TEXTURE */
+.card.xai-bg {
+    /* Replace with your image path */
+    background-image: linear-gradient(to bottom, rgba(5, 5, 5, 0.25), rgba(0, 0, 0, 0.95)), 
+                      url('output2.png');
+}
+
+/* CARD 3 BACKGROUND: DOMAIN / DATA MESH TEXTURE */
+.card.network-bg {
+    /* Replace with your image path */
+    background-image: linear-gradient(to bottom, rgba(5, 5, 5, 0.25), rgba(0, 0, 0, 0.95)), 
+                      url('output3.png');
+}
+
+/* SMOOTH HOVER STATES FOR ELEVATION & VISIBILITY */
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #0084ff; /* Digital Blue Accent */
+    box-shadow: 0 10px 25px rgba(0, 132, 255, 0.12);
+}
+
+.card.microscopy-bg:hover {
+    background-image: linear-gradient(to bottom, rgba(5, 5, 5, 0.70), rgba(0, 0, 0, 0.9)), 
+                      url('output1.png');
+}
+
+.card.xai-bg:hover {
+    background-image: linear-gradient(to bottom, rgba(5, 5, 5, 0.70), rgba(0, 0, 0, 0.9)), 
+                      url('output2.png');
+}
+
+.card.network-bg:hover {
+    background-image: linear-gradient(to bottom, rgba(5, 5, 5, 0.70), rgba(0, 0, 0, 0.9)), 
+                      url('output3.png');
+}
+
+</style>
+
+
 
     <section id="publications" style="background: rgba(255,255,255,0.01);">
         <h2 class="section-title">Selected Publications</h2>
